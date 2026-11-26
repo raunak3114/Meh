@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Meher 💛</title>
+<style>
+:root{color-scheme:light;--bg1:#ffe3ec;--bg2:#e6e0ff;--ink:#3b2a4a;--pink:#ff5d8f;--card:#ffffffd9}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:linear-gradient(135deg,var(--bg1),var(--bg2));padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);overflow-x:hidden}
+#bar{position:fixed;top:env(safe-area-inset-top,0);left:0;height:6px;background:var(--pink);width:10%;transition:width .5s;z-index:5}
+.page{display:none;min-height:100%;padding:28px 20px;align-items:center;justify-content:center;flex-direction:column;text-align:center;animation:in .5s}
+.page.on{display:flex}
+@keyframes in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:24px;padding:28px 22px;max-width:420px;width:100%;box-shadow:0 10px 30px #7a4cff22}
+h1{font-size:1.7rem;margin:.2em 0}p{line-height:1.5;margin:.6em 0}
+.big{font-size:3rem}
+button,.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:14px 26px;margin:6px;background:var(--pink);color:#fff;cursor:pointer;box-shadow:0 6px 14px #ff5d8f55}
+button:disabled{background:#c9bfd6;box-shadow:none;cursor:not-allowed}
+.opt{background:#fff;color:var(--ink);border:2px solid #e3d6f5;box-shadow:none}
+.opt.sel{border-color:var(--pink);background:#fff0f5}
+input[type=text]{font:inherit;padding:12px 16px;border-radius:14px;border:2px solid #e3d6f5;width:80%;text-align:center}
+input[type=range]{width:90%;accent-color:var(--pink)}
+.hint{font-size:.85rem;opacity:.7}
+.task{font-weight:700;color:var(--pink)}
+#field{position:relative;height:220px;background:#fff8;border-radius:18px;margin:12px 0;overflow:hidden}
+.fh{position:absolute;font-size:2.2rem;cursor:pointer;user-select:none;transition:top 2.5s linear}
+ul.pr{list-style:none;padding:0;text-align:left}
+ul.pr li{background:#fff;border-radius:14px;padding:10px 12px;margin:8px 0;display:flex;gap:10px;align-items:center}
+ul.pr input{width:22px;height:22px;accent-color:var(--pink)}
+.stars span{font-size:2.2rem;cursor:pointer;filter:grayscale(1);opacity:.5}.stars span.on{filter:none;opacity:1}
+#no{position:fixed;z-index:20;background:#8b7fa0;box-shadow:none}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:30}
+</style></head><body>
+<div id="bar"></div>
+
+<section class="page on" id="p1"><div class="card">
+<div class="big">💌</div><h1>Hey Meher!</h1>
+<p>Raunak made something just for you. There are 10 little pages, and each one has a tiny task to unlock the next.</p>
+<p class="task">Task: tap the heart 3 times</p>
+<div class="big" id="heart" style="cursor:pointer">💗</div><p class="hint" id="c1">0 / 3</p>
+<button class="nx" disabled>Next ➜</button></div></section>
+
+<section class="page" id="p2"><div class="card">
+<h1>Pick your vibe ✨</h1><p class="task">Task: choose one</p>
+<div id="vibes"><button class="opt">🌸 Cute</button><button class="opt">🔥 Chaotic</button><button class="opt">😎 Cool</button><button class="opt">🌙 Chill</button></div>
+<p id="vt" class="hint">Every vibe is perfect.</p>
+<button class="nx" disabled>Next ➜</button></div></section>
+
+<section class="page" id="p3"><div class="card">
+<h1>Catch the hearts 💖</h1><p class="task">Task: catch 5 falling hearts</p>
+<div id="field"></div><p class="hint" id="c3">0 / 5</p>
+<button class="nx" disabled>Next ➜</button></div></section>
+
+<section class="page" id="p4"><div class="card">
+<h1>Secret word 🔐</h1><p>What do we want to become?<br><span class="hint">Hint: two words, starts with "best" and ends with "friends"</span></p>
+<p class="task">Task: type the secret word</p>
+<input type="text" id="sw" placeholder="type here..." autocomplete="off"><p class="hint" id="swm"></p>
+<p class="hint">Just type: best friends</p>
+<button class="nx" disabled>Next ➜</button></div></section>
+
+<section class="page" id="p5"><div class="card">
+<h1>Important question 🍕</h1><p>Which snack should we share on our first best friend hangout?</p>
+<p class="task">Task: pick one</p>
+<div id="snacks"><button class="opt">🍕 Pizza</button><button class="opt">🍦 Ice cream</button><button class="opt">🍫 Chocolate</button><button class="opt">🍟 Fries</button></div>
+<p id="st" class="hint">Great choice, I'm in.</p>
+<button class="nx" disabled>Next ➜</button></div></section>
+
+<section class="page" id="p6"><div class="card">
+<h1>Fun meter 🎢</h1><p>How much fun will we have as best friends?</p>
+<p class="task">Task: slide it all the way to 100%</p>
+<input type="range" id="fun" min="0" max="100" value="0"><h2 id="fv">0%</h2>
+<button class="nx" disabled>Next ➜</button></div></section>
+
+<section class="page" id="p7"><div class="card">
+<h1>My promises 🤝</h1><p class="task">Task: tick every promise to accept it</p>
+<ul class="pr">
+<li><input type="checkbox"> I'll always be honest with you.</li>
+<li><input type="checkbox"> I'll listen when you need to talk.</li>
+<li><input type="checkbox"> I'll cheer for you in everything you do.</li>
+<li><input type="checkbox"> I'll make you laugh on bad days.</li>
+<li><input type="checkbox"> I'll respect you and your space, always.</li>
+</ul>
+<button class="nx" disabled>Next ➜</button></div></section>
+
+<section class="page" id="p8"><div class="card">
+<div class="big">🥹</div><h1>Thank you, Meher</h1>
+<p>Thank you for being in my life, and for maybe becoming my new best friend. You make ordinary days feel better, and I really mean that.</p>
+<p>With love (the friendly kind 💛),<br><b>Raunak</b></p>
+<p class="task">Task: rate this note</p>
+<div class="stars" id="stars"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+<button class="nx" disabled>Next ➜</button></div></section>
+
+<section class="page" id="p9"><div class="card">
+<h1>Almost there 🥁</h1><p>One last warm-up. Are you ready for the big question?</p>
+<p class="task">Task: hold the button for 2 seconds</p>
+<button id="hold">Hold me 🤞</button><p class="hint" id="hm"></p>
+<button class="nx" disabled>Next ➜</button></div></section>
+
+<section class="page" id="p10"><div class="card" id="final">
+<div class="big">🎉</div><h1>Meher, will you be my best friend?</h1>
+<p>– Raunak</p>
+<button id="yes">Yes! 💖</button>
+<button id="no">No 😢</button>
+</div></section>
+
+<canvas id="cv"></canvas>
+<script>
+var cur=1,pages=[].slice.call(document.querySelectorAll('.page')),bar=document.getElementById('bar');
+function unlock(n){var b=document.querySelector('#p'+n+' .nx');if(b)b.disabled=false}
+function go(n){pages.forEach(function(p){p.classList.remove('on')});document.getElementById('p'+n).classList.add('on');cur=n;bar.style.width=n*10+'%';window.scrollTo(0,0);if(n==3)startHearts();if(n==10)placeNo()}
+document.querySelectorAll('.nx').forEach(function(b){b.onclick=function(){go(cur+1)}});
+/* 1 */
+var h=0,hh=document.getElementById('heart');hh.onclick=function(){h++;document.getElementById('c1').textContent=Math.min(h,3)+' / 3';hh.style.transform='scale(1.4)';setTimeout(function(){hh.style.transform=''},150);if(h>=3)unlock(1)};
+/* 2 & 5 */
+function pick(id,msg,n,out){document.querySelectorAll('#'+id+' .opt').forEach(function(b){b.onclick=function(){document.querySelectorAll('#'+id+' .opt').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');unlock(n)}})}
+pick('vibes','',2);pick('snacks','',5);
+/* 3 */
+var caught=0,hi;function startHearts(){var f=document.getElementById('field');if(hi)return;hi=setInterval(function(){var e=document.createElement('div');e.className='fh';e.textContent='💖';e.style.left=Math.random()*80+'%';e.style.top='-40px';f.appendChild(e);setTimeout(function(){e.style.top='200px'},30);e.onclick=function(){e.remove();caught++;document.getElementById('c3').textContent=Math.min(caught,5)+' / 5';if(caught>=5){unlock(3);clearInterval(hi)}};setTimeout(function(){e.remove()},2700)},700)}
+/* 4 */
+document.getElementById('sw').oninput=function(){var v=this.value.trim().toLowerCase();if(v==='best friends'||v==='bestfriends'){document.getElementById('swm').textContent='Correct! 🎊';unlock(4)}};
+/* 6 */
+document.getElementById('fun').oninput=function(){document.getElementById('fv').textContent=this.value+'%';if(+this.value===100)unlock(6)};
+/* 7 */
+var cbs=document.querySelectorAll('#p7 input');cbs.forEach(function(c){c.onchange=function(){var all=true;cbs.forEach(function(x){if(!x.checked)all=false});if(all)unlock(7)}});
+/* 8 */
+var st=document.querySelectorAll('#stars span');st.forEach(function(s,i){s.onclick=function(){st.forEach(function(x,j){x.classList.toggle('on',j<=i)});unlock(8)}});
+/* 9 */
+var ht,hb=document.getElementById('hold');function hs(e){e.preventDefault();document.getElementById('hm').textContent='Keep holding...';ht=setTimeout(function(){document.getElementById('hm').textContent='Done! 🎉';unlock(9);boom()},2000)}function he(){clearTimeout(ht)}
+hb.addEventListener('pointerdown',hs);['pointerup','pointerleave','pointercancel'].forEach(function(t){hb.addEventListener(t,he)});
+/* 10 runaway No */
+var no=document.getElementById('no');
+function placeNo(){var r=document.getElementById('yes').getBoundingClientRect();no.style.left=Math.min(innerWidth-110,r.right+10)+'px';no.style.top=r.top+'px'}
+function flee(e){if(e&&e.preventDefault)e.preventDefault();var w=innerWidth-no.offsetWidth-10,h2=innerHeight-no.offsetHeight-10;no.style.left=Math.max(5,Math.random()*w)+'px';no.style.top=Math.max(5,Math.random()*h2)+'px'}
+['pointerenter','pointerdown','touchstart','mouseover','click','focus'].forEach(function(t){no.addEventListener(t,flee,{passive:false})});
+document.getElementById('yes').onclick=function(){no.style.display='none';document.getElementById('final').innerHTML='<div class="big">🥳💛</div><h1>Yay! Best friends!</h1><p>Thank you, Meher. This is going to be the best friendship ever.</p><p><b>– Raunak</b></p>';boom();setInterval(boom,2500)};
+/* confetti */
+var cv=document.getElementById('cv'),cx=cv.getContext('2d'),ps=[];function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener('resize',rs);
+function boom(){for(var i=0;i<140;i++)ps.push({x:innerWidth/2,y:innerHeight/2,vx:(Math.random()-.5)*16,vy:Math.random()*-16-2,c:'hsl('+Math.random()*360+',90%,60%)',s:5+Math.random()*6,l:120})}
+(function loop(){cx.clearRect(0,0,cv.width,cv.height);ps=ps.filter(function(p){return p.l>0});ps.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.vy+=.4;p.l--;cx.fillStyle=p.c;cx.fillRect(p.x,p.y,p.s,p.s)});requestAnimationFrame(loop)})();
+</script></body></html>
